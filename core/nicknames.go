@@ -4,12 +4,23 @@ import (
 	"encoding/json"
 )
 
+var nickname_to_name_map = map[string][]string{}
+var name_from_nickname_map = map[string]string{}
+
+func INIT_MAPS() {
+
+	json.Unmarshal([]byte(NAME_TO_NICKNAME), &nickname_to_name_map)
+
+	json.Unmarshal([]byte(Nickname_To_Name), &name_from_nickname_map)
+
+}
+
 func FindNickNames(name string) (bool, []string) {
 	result := []string{}
-	names := map[string][]string{}
+	// names := map[string][]string{}
 
-	json.Unmarshal([]byte(NAME_TO_NICKNAME), &names)
-	value, exists := names[name]
+	// json.Unmarshal([]byte(NAME_TO_NICKNAME), &names)
+	value, exists := nickname_to_name_map[name]
 	if exists {
 		return exists, value
 	}
@@ -19,10 +30,10 @@ func FindNickNames(name string) (bool, []string) {
 
 func FindNameFromNickName(name string) (bool, string) {
 	var result string
-	names := map[string]string{}
+	// names := map[string]string{}
 
-	json.Unmarshal([]byte(Nickname_To_Name), &names)
-	value, exists := names[name]
+	// json.Unmarshal([]byte(Nickname_To_Name), &names)
+	value, exists := name_from_nickname_map[name]
 	if exists {
 		return exists, value
 	}

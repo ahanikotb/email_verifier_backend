@@ -2,6 +2,7 @@ package main
 
 import (
 	"topemailvalidator/api"
+	"topemailvalidator/core"
 	"topemailvalidator/database"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,7 @@ func main() {
 	}()
 	godotenv.Load()
 	database.OPENDB()
+	core.INIT_MAPS()
 	//if err := os.Remove("./database/test.db"); err != nil {
 	//	log.Fatal(err)
 	//}
