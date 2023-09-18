@@ -35,6 +35,11 @@ func BruteForceValidateEmail(fname string, lname string, domain string, useGener
 			options = append(options, MakeNameOptions(nickname, CleanName(lname))...)
 		}
 	}
+	real_name_exists, real_name := FindNameFromNickName(CleanFName(fname))
+	if real_name_exists {
+		options = append(options, MakeNameOptions(real_name, CleanName(lname))...)
+	}
+
 	for i := range options {
 		username := options[i]
 		res := ValidateEmail(username + "@" + domain)
